@@ -59,7 +59,8 @@ func (bot Bot) DoAPIRequest(
 			bot.httpErrorLog(prefix, "call failed", err)
 			return err
 		}
-		if bot.debug {
+		// if bot.debug {
+                if true {
 			b, _ := httputil.DumpResponse(resp, true)
 			bot.logger.Log(bot.ctx, LogLevelDebug, string(b))
 		}
