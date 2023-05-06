@@ -48,17 +48,17 @@ func (bot Bot) DoAPIRequest(
 			return err
 		}
 	} else {
-		fmt.Printf("http.NewRequest: method=%s, url=%s, body=%s\n", method, url, body)
+		bot.logger.Log(bot.ctx, LogLevelDebug, fmt.Sprintf("http.NewRequest: method=%s, url=%s, body=%s\n", method, url, body))
 		req, err := http.NewRequest(method, url, body)
-		fmt.Printf("http.NewRequest:req: %v\n", req)
+		bot.logger.Log(bot.ctx, LogLevelDebug, fmt.Sprintf("http.NewRequest:req: %v\n", req))
 		if err != nil {
 			bot.httpErrorLog(prefix, "init request failed", err)
 			return err
 		}
 		req.Header = header
-		fmt.Printf("bot.client.Do:req: %v\n", req)
+		bot.logger.Log(bot.ctx, LogLevelDebug, fmt.Sprintf("bot.client.Do:req: %v\n", req))
 		resp, err := bot.client.Do(req)
-		fmt.Printf("bot.client.Do:resp: %v\n", resp)
+		bot.logger.Log(bot.ctx, LogLevelDebug, fmt.Sprintf("bot.client.Do:resp: %v\n", resp))
 		if err != nil {
 			bot.httpErrorLog(prefix, "call failed", err)
 			return err
